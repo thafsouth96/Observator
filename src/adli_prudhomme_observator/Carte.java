@@ -1,3 +1,5 @@
+package adli_prudhomme_observator;
+
 public class Carte {
 
 	Personne personne;
@@ -6,7 +8,6 @@ public class Carte {
 	public String getNumCarte() {
 		return this.numCarte;
 	}
-
 	/**
 	 * 
 	 * @param numCarte

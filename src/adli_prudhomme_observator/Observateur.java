@@ -1,4 +1,6 @@
-public abstract class Observateur {
+package adli_prudhomme_observator;
+
+public abstract class Observateur extends Thread{
 
 	/**
 	 * 

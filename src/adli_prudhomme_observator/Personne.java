@@ -1,3 +1,5 @@
+package adli_prudhomme_observator;
+
 import java.util.*;
 
 public class Personne {

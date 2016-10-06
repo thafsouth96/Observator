@@ -1,3 +1,5 @@
+package adli_prudhomme_observator;
+
 import java.util.*;
 
 public class Controler extends Observable {
@@ -7,6 +9,16 @@ public class Controler extends Observable {
 	IHMLecture ihmEmploye;
 	IHMGardien ihmGardien;
 
+        
+        
+        public Controler(){ 
+            this.ihmEmploye = new IHMLecture(this);
+            this.ihmGardien = new IHMGardien(this);
+
+            ihmGardien.start();
+            ihmEmploye.start();  
+        }
+        
 	/**
 	 * 
 	 * @param numCarte
@@ -17,7 +29,6 @@ public class Controler extends Observable {
 		// TODO - implement Controler.lireCarte
 		throw new UnsupportedOperationException();
 	}
-
 	/**
 	 * 
 	 * @param numCarte
@@ -26,7 +37,6 @@ public class Controler extends Observable {
 		// TODO - implement Controler.getCarte
 		throw new UnsupportedOperationException();
 	}
-
 	/**
 	 * 
 	 * @param numCarte
