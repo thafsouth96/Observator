@@ -33,7 +33,7 @@ public class IHMLecture implements Observer {
             //Bouton valider
             panel.add(new JButton("Valider"), BorderLayout.SOUTH);
             //Ajout du voyant 
-            panel.add(_voyant);
+            //panel.add(_voyant);
             //Ajout du panel
             frame.add(panel);
             frame.setSize(700, 700);
