@@ -14,11 +14,16 @@ public class Personne {
 	 * @param nom
 	 * @param prenom
 	 */
-	public Personne(String nom, String prenom) {
+	public Personne(String nom, String prenom, Carte c) {
             this.nom = nom;
             this.prenom = prenom;
+            this.carte = c;
 	}
 
+        public void addGroupe(GroupePersonnes g){
+            groupes.add(g);
+        }
+        
 	public String getNom() {
 		return this.nom;
 	}

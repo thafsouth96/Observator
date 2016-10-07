@@ -5,12 +5,12 @@ public class Carte {
 	private Personne personne;
 	private String numCarte;
         
-        public Carte(String numCarte) {
-                setNumCarte(numCarte);
+        public Carte(String num) {
+                setNumCarte(num);
 	}
 
 	public String getNumCarte() {
-		return this.numCarte;
+		return numCarte;
 	}
 	/**
 	 * 
@@ -19,7 +19,10 @@ public class Carte {
 	public void setNumCarte(String numCarte) {
 		this.numCarte = numCarte;
 	}
-
+        
+        public void setPersonne(Personne p){
+            this.personne=p;
+        }
 	/**
 	 * 
 	 * @param numCarte

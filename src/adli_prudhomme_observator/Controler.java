@@ -12,6 +12,8 @@ public class Controler extends Observable {
         
         
         public Controler(){ 
+            initModel();
+            
             this.ihmEmploye = new IHMLecture(this);
             this.ihmGardien = new IHMGardien(this);
             
@@ -25,24 +27,39 @@ public class Controler extends Observable {
 	 * @param codeCarte
 	 * @param idPorte
 	 */
-	public void lireCarte(int numCarte, int codeCarte, int idPorte) {
-		String codeCarteTemp = getCodeCarte(numCarte);
+	public void lireCarte(String numCarte, int codeCarte, int idPorte) {
+		String codeGroupeTemp = getCodeGroupe(numCarte);
+                String codePorteTemp = getCodePorte(idPorte);
                 
+                HashMap<String, Object> result = new HashMap<String,Object>();
+                
+                if(codeGroupeTemp.equals(codePorteTemp)){
+                  result.put("Notification", true);  
+                }else{
+                  result.put("Notification", false);
+                  result.put("Date",new Date().toString());
+                  result.put("Personne",getPersonne(numCarte));
+                }
+                this.notifyObservers(result);
 	}
 	/**
 	 * 
 	 * @param numCarte
 	 */
-	public Carte getCarte(int numCarte) {
+	private Carte getCarte(String numCarte) {
 		return cartes.get(numCarte);
 	}
 	/**
 	 * 
 	 * @param numCarte
 	 */
-	public String getCodeCarte(int numCarte) {
+	private String getCodeGroupe(String numCarte) {
 		return getCarte(numCarte).getPersonne().getGroupes().get(0).getCode();
 	}
+        
+        private String getPersonne(String numcarte){
+            return (getCarte(numcarte).getPersonne().getNom() + getCarte(numcarte).getPersonne().getPrenom());
+        }
 
 	/**
 	 * 
@@ -56,11 +73,30 @@ public class Controler extends Observable {
 		return portes;
 	}
 
-        public IHMLecture getIhmLecture(){
+        private IHMLecture getIhmLecture(){
             return this.ihmEmploye;
         }
-	public IHMGardien getIhmGardien() {
+	private IHMGardien getIhmGardien() {
 		return this.ihmGardien;
 	}
 
+        private void initModel(){
+            //Création des groupes
+            GroupePersonnes groupePers = new GroupePersonnes("alpha1");
+            GroupePortes groupePortes = new GroupePortes("alpha1","Z");
+            //Inclusion des groupes dans l'autre groupe
+            groupePers.addGroupePortes(groupePortes);
+            groupePortes.addGroupeOuvre(groupePers);
+            //Création Porte et Personne/Carte
+            Porte porte1 = new Porte(0,groupePortes);
+            Carte c1 = new Carte("R22");
+            Personne pers1 = new Personne("Gilmour","David",c1);
+            
+            //Inclusion dans les autres classes
+            groupePortes.addPorte(porte1);
+            portes.put(porte1.getIdPorte(), porte1);
+            this.cartes.put(c1.getNumCarte(), c1);
+            groupePers.addPersonne(pers1);
+            pers1.addGroupe(groupePers);
+        }
 }
