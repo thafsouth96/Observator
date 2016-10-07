@@ -1,33 +1,26 @@
 package adli_prudhomme_observator;
 
-public class IHMGardien extends Observateur implements Runnable {
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JFrame;
+
+public class IHMGardien extends JFrame implements Observer {
 
 	private Controler _controler;
 
 	public IHMGardien(Controler c){
             this._controler = c;
+            //setWindows();
         }
         
-        public void run(){
-            while(true){
-                System.out.println("IHMGardien");
-                
-                // Pour endormir un thread
-                /*try {
-                    this.sleep(6000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-            }
+        private void setWindows(){
+            JFrame frame = new JFrame("Gardien - Rapport des intrusions");
         }
-        
-        /**
-	 * @param o
-	 * @param c
-	 */
-	public void actualiser(Observable o, Controler c) {
-		// TODO - implement IHMGardien.actualiser
-		throw new UnsupportedOperationException();
-	}
+
+
+        @Override
+         public void update(Observable o, Object arg) {
+             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         }
 
 }

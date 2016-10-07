@@ -1,35 +1,68 @@
 package adli_prudhomme_observator;
 
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class IHMLecture extends Observateur implements Runnable {
+
+public class IHMLecture implements Observer {
 
 	private Controler _controler;
+        private boolean _voyantVert;
+        private JPanel _voyant;
       
         public IHMLecture(Controler c){
             this._controler = c;
+             _voyantVert = false;
+            _voyant = new JPanel();
+            _voyant.setPreferredSize(new Dimension(40, 40));
+            
+            setWindows();
+            setCouleurVoyant();
         }
         
-        public void run(){
-            while(true){
-                System.out.println("IHMLecture");
-                
-                // Pour endormir un thread
-                /*try {
-                    this.sleep(6000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
+        private void setWindows(){         
+            //Création de la fenètre
+            JFrame frame = new JFrame("Porte 22 -Accès batiment A ");
+            //Création du panel et de ses grid
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            //Ajout des labels et champs 
+            panel.add(setMainPanel(),BorderLayout.CENTER);
+            //Bouton valider
+            panel.add(new JButton("Valider"), BorderLayout.SOUTH);
+            //Ajout du voyant 
+            panel.add(_voyant);
+            //Ajout du panel
+            frame.add(panel);
+            frame.setSize(700, 700);
+            frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+        }
+        
+        protected JComponent setMainPanel() {
+            JPanel inner = new JPanel();
+            inner.setLayout(new GridLayout(2, 2, 10, 0));
+            inner.add(new JLabel("Numéro Employé : "));
+            inner.add(new JTextField());
+            inner.add(new JLabel("Numéro Employé : "));
+            inner.add(new JTextField());
+            return inner;
+          }
+        
+        public void setCouleurVoyant(){
+            if(_voyantVert){
+                _voyant.setBackground(Color.green);
+            }else{
+                _voyant.setBackground(Color.red);
             }
         }
         
-	/**
-	 * @param o
-	 * @param c
-	 */
-	public void actualiser(Observable o, Controler c) {
-		// TODO - implement IHMLecture.actualiser
-		throw new UnsupportedOperationException();
-	}
+        @Override
+        public void update(Observable o, Object arg) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
 
 }

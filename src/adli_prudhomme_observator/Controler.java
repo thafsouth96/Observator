@@ -15,8 +15,6 @@ public class Controler extends Observable {
             this.ihmEmploye = new IHMLecture(this);
             this.ihmGardien = new IHMGardien(this);
 
-            ihmGardien.start();
-            ihmEmploye.start();  
         }
         
 	/**
