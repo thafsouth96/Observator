@@ -16,7 +16,6 @@ public class IHMLecture implements Observer {
             this._controler = c;
              _voyantVert = false;
             _voyant = new JPanel();
-            _voyant.setPreferredSize(new Dimension(40, 40));
             
             setWindows();
             setCouleurVoyant();
@@ -47,7 +46,7 @@ public class IHMLecture implements Observer {
             inner.setLayout(new GridLayout(2, 2, 10, 0));
             inner.add(new JLabel("Numéro Employé : "));
             inner.add(new JTextField());
-            inner.add(new JLabel("Numéro Employé : "));
+            inner.add(new JLabel("Numéro Carte : "));
             inner.add(new JTextField());
             return inner;
           }

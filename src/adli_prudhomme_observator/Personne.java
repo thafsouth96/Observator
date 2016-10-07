@@ -15,8 +15,8 @@ public class Personne {
 	 * @param prenom
 	 */
 	public Personne(String nom, String prenom) {
-		// TODO - implement Personne.Personne
-		throw new UnsupportedOperationException();
+            this.nom = nom;
+            this.prenom = prenom;
 	}
 
 	public String getNom() {
