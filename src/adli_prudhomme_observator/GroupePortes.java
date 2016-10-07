@@ -4,8 +4,8 @@ import java.util.*;
 
 public class GroupePortes {
 
-	Collection<Porte> portes;
-	Collection<GroupePersonnes> PersonneOuvre;
+	private HashMap<Integer, Porte> portes = new HashMap<Integer, Porte>();
+	private ArrayList<GroupePersonnes> PersonneOuvre = new ArrayList<>();
 	private String code;
 	private String batiment;
 
@@ -14,8 +14,7 @@ public class GroupePortes {
 	 * @param porte
 	 */
 	public void addPorte(Porte porte) {
-		// TODO - implement GroupePortes.addPorte
-		throw new UnsupportedOperationException();
+		portes.put(porte.getIdPorte(), porte);
 	}
 
 	public String getCode() {
@@ -41,19 +40,4 @@ public class GroupePortes {
 	public void setBatiment(String batiment) {
 		this.batiment = batiment;
 	}
-
-	public void getAttribute() {
-		// TODO - implement GroupePortes.getAttribute
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param attribute
-	 */
-	public void setAttribute(int attribute) {
-		// TODO - implement GroupePortes.setAttribute
-		throw new UnsupportedOperationException();
-	}
-
 }

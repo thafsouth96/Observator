@@ -4,8 +4,8 @@ import java.util.*;
 
 public class GroupePersonnes {
 
-	Collection<Personne> personnes;
-	Collection<GroupePortes> portes;
+	private HashMap<String,Personne> personnes = new HashMap<String,Personne>();
+	private ArrayList<GroupePortes> portes = new ArrayList<>();
 	private String code;
 
 	/**
@@ -13,20 +13,14 @@ public class GroupePersonnes {
 	 * @param personne
 	 */
 	public void addPersonne(Personne personne) {
-		// TODO - implement GroupePersonnes.addPersonne
-		throw new UnsupportedOperationException();
+		personnes.put(personne.getCarte().getNumCarte(), personne);
 	}
+        
+        public String getCode(){
+            return code;
+        }
 
-	public String getCode() {
-		return this.code;
-	}
 
-	/**
-	 * 
-	 * @param code
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
+	
 
 }

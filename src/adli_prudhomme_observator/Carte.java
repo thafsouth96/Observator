@@ -2,8 +2,12 @@ package adli_prudhomme_observator;
 
 public class Carte {
 
-	Personne personne;
+	private Personne personne;
 	private String numCarte;
+        
+        public Carte(String numCarte) {
+                setNumCarte(numCarte);
+	}
 
 	public String getNumCarte() {
 		return this.numCarte;
@@ -20,11 +24,6 @@ public class Carte {
 	 * 
 	 * @param numCarte
 	 */
-	public Carte(Carte numCarte) {
-		// TODO - implement Carte.Carte
-		throw new UnsupportedOperationException();
-	}
-
 	public Personne getPersonne() {
 		return this.personne;
 	}

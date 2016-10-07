@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Personne {
 
-	Collection<GroupePersonnes> groupes;
-	Carte carte;
+	private ArrayList<GroupePersonnes> groupes = new ArrayList<>();
+	private Carte carte;
 	private String nom;
 	private String prenom;
 
@@ -35,6 +35,10 @@ public class Personne {
 		return this.prenom;
 	}
 
+        public Carte getCarte(){
+            return carte;
+        }
+        
 	/**
 	 * 
 	 * @param prenom
@@ -44,8 +48,7 @@ public class Personne {
 	}
 
 	public ArrayList<GroupePersonnes> getGroupes() {
-		// TODO - implement Personne.getGroupes
-		throw new UnsupportedOperationException();
+		return groupes;
 	}
 
 }
