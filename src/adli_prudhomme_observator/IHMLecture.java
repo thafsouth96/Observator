@@ -1,6 +1,8 @@
 package adli_prudhomme_observator;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,14 +21,68 @@ public class IHMLecture implements Observer {
     private Controler _controler;
     private boolean _voyantVert;
     private MyCanvas _voyant;
+    private JTextField code_carte ; 
+    private JTextField num_carte ; 
+     
 
     public IHMLecture(Controler c) {
         this._controler = c;
         _voyantVert = false;
         _voyant = new MyCanvas();
+        code_carte = new JTextField(); 
+        num_carte = new JTextField(); 
 
         setWindows();
         setCouleurVoyant();
+    }
+    
+    public String getCodeVAl(){
+        
+        return code_carte.getText(); //retourne la valeur saisie dans le JTextField 
+    }
+    
+    public String getNumCarteVAl(){
+        return num_carte.getText(); 
+    }
+
+    public Controler getControler() {
+        return _controler;
+    }
+
+    public void setControler(Controler _controler) {
+        this._controler = _controler;
+    }
+
+    public boolean isVoyantVert() {
+        return _voyantVert;
+    }
+
+    public void setVoyantVert(boolean _voyantVert) {
+        this._voyantVert = _voyantVert;
+    }
+
+    public MyCanvas getVoyant() {
+        return _voyant;
+    }
+
+    public void setVoyant(MyCanvas _voyant) {
+        this._voyant = _voyant;
+    }
+
+    public JTextField getCode_carte() {
+        return code_carte;
+    }
+
+    public void setCode_carte(JTextField code_carte) {
+        this.code_carte = code_carte;
+    }
+
+    public JTextField getNum_carte() {
+        return num_carte;
+    }
+
+    public void setNum_carte(JTextField num_carte) {
+        this.num_carte = num_carte;
     }
 
     private void setWindows() {
@@ -38,7 +94,15 @@ public class IHMLecture implements Observer {
         //Ajout des labels et champs 
         panel.add(setMainPanel(), BorderLayout.CENTER);
         //Bouton valider
-        panel.add(new JButton("Valider"), BorderLayout.SOUTH);
+        JButton b_valider = new JButton("Valider"); 
+        b_valider.addActionListener(new ActionListener(
+        ) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        panel.add(b_valider, BorderLayout.SOUTH);
         //Ajout du voyant 
         //panel.add(_voyant);
         //Ajout du panel
@@ -49,6 +113,8 @@ public class IHMLecture implements Observer {
         frame.setVisible(true);
         //valider ==> controler.lirecarte(); 
     }
+    
+  
 
     protected JComponent setMainPanel() {
         JPanel main_panel = new JPanel();
@@ -62,16 +128,18 @@ public class IHMLecture implements Observer {
         //Dimension d = new Dimension(100, 400);
 
         panel_code.add(new JLabel("Numéro Carte : "));
-        JTextField code = new JTextField();
+        
         //code.setSize(d);
-        panel_code.add(code);
+        panel_code.add(this.getCode_carte());
 
         JPanel panel_num = new JPanel();
         panel_num.setLayout(new GridLayout(1, 2));
      
-
+        
         panel_num.add(new JLabel("Numéro Employé : "));
-        panel_num.add(new JTextField());
+        
+        //numero.setPreferredSize(new Dimension(200, 24));
+        panel_num.add(this.getNum_carte());
 
         JPanel panel_voyant = new JPanel();
         panel_voyant.setLayout(new GridLayout(1, 2));
