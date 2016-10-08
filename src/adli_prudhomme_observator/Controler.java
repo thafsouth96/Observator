@@ -27,9 +27,15 @@ public class Controler extends Observable {
 	 * @param codeCarte
 	 * @param idPorte
 	 */
-	public void lireCarte(String numCarte, int codeCarte, int idPorte) {
-		String codeGroupeTemp = getCodeGroupe(numCarte);
-                String codePorteTemp = getCodePorte(idPorte);
+	public void lireCarte(String numCarte, String numEmploye, int idPorte) {
+                String codeGroupeTemp = "NoValid1";
+                String codePorteTemp = "NoValide2";
+                try{
+                    codeGroupeTemp = getCodeGroupe(numCarte);
+                    codePorteTemp = getCodePorte(idPorte);
+                }catch(Exception e){
+                    System.out.println("Gotcha");
+                }
                 
                 HashMap<String, Object> result = new HashMap<String,Object>();
                 
@@ -38,8 +44,10 @@ public class Controler extends Observable {
                 }else{
                   result.put("Notification", false);
                   result.put("Date",new Date().toString());
+                  result.put("NumPers", numEmploye);
                   result.put("Personne",getPersonne(numCarte));
                 }
+                setChanged();
                 this.notifyObservers(result);
 	}
 	/**
@@ -96,6 +104,7 @@ public class Controler extends Observable {
             groupePortes.addPorte(porte1);
             portes.put(porte1.getIdPorte(), porte1);
             this.cartes.put(c1.getNumCarte(), c1);
+            c1.setPersonne(pers1);
             groupePers.addPersonne(pers1);
             pers1.addGroupe(groupePers);
         }

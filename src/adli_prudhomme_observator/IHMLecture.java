@@ -3,9 +3,12 @@ package adli_prudhomme_observator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.time.zone.ZoneRulesProvider.refresh;
+import java.util.HashMap;
 import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 
 class MyCanvas extends JComponent {
 
@@ -84,6 +87,10 @@ public class IHMLecture implements Observer {
     public void setNum_carte(JTextField num_carte) {
         this.num_carte = num_carte;
     }
+    
+    private void sendData(){
+        _controler.lireCarte(code_carte.getText(),num_carte.getText() , 0);
+    }
 
     private void setWindows() {
         //Création de la fenètre
@@ -99,7 +106,7 @@ public class IHMLecture implements Observer {
         ) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                sendData();
             }
         });
         panel.add(b_valider, BorderLayout.SOUTH);
@@ -146,6 +153,7 @@ public class IHMLecture implements Observer {
         
         panel_voyant.add(new JLabel("Voyant "));
         panel_voyant.add(_voyant);
+        _voyant.setBackground(Color.red);
 
         main_panel.add(panel_code);
         main_panel.add(panel_num);
@@ -163,7 +171,20 @@ public class IHMLecture implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       HashMap<String, Object> map = (HashMap<String, Object>) arg;
+       if((boolean) map.get("Notification")){
+           _voyantVert = true;
+           setCouleurVoyant();
+           _voyant.repaint();
+           /*try{
+               TimeUnit.SECONDS.sleep(5);
+           }catch(Exception e){
+               System.out.println("Exception : " + e.getMessage());
+           }*/
+       }
+        /*_voyantVert = false;
+        setCouleurVoyant();  */     
+       
     }
 
 }
