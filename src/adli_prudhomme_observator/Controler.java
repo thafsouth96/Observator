@@ -91,6 +91,7 @@ public class Controler extends Observable {
         private void initModel(){
             //Création des groupes
             GroupePersonnes groupePers = new GroupePersonnes("alpha1");
+            GroupePersonnes groupePersBis = new GroupePersonnes("Gamma2");
             GroupePortes groupePortes = new GroupePortes("alpha1","Z");
             //Inclusion des groupes dans l'autre groupe
             groupePers.addGroupePortes(groupePortes);
@@ -98,7 +99,9 @@ public class Controler extends Observable {
             //Création Porte et Personne/Carte
             Porte porte1 = new Porte(0,groupePortes);
             Carte c1 = new Carte("R22");
+            Carte c2 = new Carte("T11");
             Personne pers1 = new Personne("Gilmour","David",c1);
+            Personne pers0 = new Personne("","",c2);
             
             //Inclusion dans les autres classes
             groupePortes.addPorte(porte1);
