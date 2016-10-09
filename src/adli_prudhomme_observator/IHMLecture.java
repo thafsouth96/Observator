@@ -3,27 +3,17 @@ package adli_prudhomme_observator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.time.zone.ZoneRulesProvider.refresh;
 import java.util.HashMap;
 import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.TimeUnit;
-
-class MyCanvas extends JComponent {
-
-    @Override
-    public void paint(Graphics g) {
-        g.drawRect(60, 60, 60, 60);
-
-    }
-}
 
 public class IHMLecture implements Observer {
 
     private Controler _controler;
     private boolean _voyantVert;
-    private MyCanvas _voyant;
+    private JPanel _voyant;
+    private JFrame frame;
     private JTextField code_carte ; 
     private JTextField num_carte ; 
      
@@ -31,7 +21,8 @@ public class IHMLecture implements Observer {
     public IHMLecture(Controler c) {
         this._controler = c;
         _voyantVert = false;
-        _voyant = new MyCanvas();
+        _voyant = new JPanel();
+        _voyant.setPreferredSize( new Dimension( 90, 90 ) );
         code_carte = new JTextField(); 
         num_carte = new JTextField(); 
 
@@ -64,11 +55,11 @@ public class IHMLecture implements Observer {
         this._voyantVert = _voyantVert;
     }
 
-    public MyCanvas getVoyant() {
+    public JPanel getVoyant() {
         return _voyant;
     }
 
-    public void setVoyant(MyCanvas _voyant) {
+    public void setVoyant(JPanel _voyant) {
         this._voyant = _voyant;
     }
 
@@ -94,7 +85,7 @@ public class IHMLecture implements Observer {
 
     private void setWindows() {
         //Création de la fenètre
-        JFrame frame = new JFrame("Porte 22 -Accès batiment A ");
+        frame = new JFrame("Porte 22 -Accès batiment A ");
         //Création du panel et de ses grid
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -110,15 +101,13 @@ public class IHMLecture implements Observer {
             }
         });
         panel.add(b_valider, BorderLayout.SOUTH);
-        //Ajout du voyant 
-        //panel.add(_voyant);
         //Ajout du panel
         frame.add(panel);
         frame.setSize(700, 700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.validate();
         frame.setVisible(true);
-        //valider ==> controler.lirecarte(); 
     }
     
   
@@ -153,7 +142,7 @@ public class IHMLecture implements Observer {
         
         panel_voyant.add(new JLabel("Voyant "));
         panel_voyant.add(_voyant);
-        _voyant.setBackground(Color.red);
+        //_voyant.setBackground(Color.red);
 
         main_panel.add(panel_code);
         main_panel.add(panel_num);
@@ -169,6 +158,8 @@ public class IHMLecture implements Observer {
         }
     }
 
+
+    
     @Override
     public void update(Observable o, Object arg) {
        HashMap<String, Object> map = (HashMap<String, Object>) arg;
@@ -176,15 +167,22 @@ public class IHMLecture implements Observer {
            _voyantVert = true;
            setCouleurVoyant();
            _voyant.repaint();
-           /*try{
-               TimeUnit.SECONDS.sleep(5);
-           }catch(Exception e){
-               System.out.println("Exception : " + e.getMessage());
-           }*/
+           this._voyant.revalidate();
        }
-        /*_voyantVert = false;
-        setCouleurVoyant();  */     
+       _voyantVert = false;
        
+        Thread thread = new Thread(){
+            @Override
+            public void run(){
+                try{
+                    this.sleep(4000);
+                }catch(Exception e){
+                    System.out.println("Gotcha");
+                }
+                _voyant.setBackground(Color.red);
+            }
+        };
+        thread.start();
     }
 
 }
