@@ -45,6 +45,7 @@ public class Controler extends Observable {
                   result.put("Notification", false);
                   result.put("Date",new Date().toString());
                   result.put("NumPers", numEmploye);
+                  result.put("idPorte", idPorte);
                   result.put("Personne",getPersonne(numCarte));
                 }
                 setChanged();

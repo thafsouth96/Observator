@@ -102,7 +102,7 @@ public class IHMLecture implements Observer {
         panel.add(b_valider, BorderLayout.SOUTH);
         //Ajout du panel
         frame.add(panel);
-        frame.setSize(700, 700);
+        frame.setSize(750, 800);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.validate();
@@ -111,7 +111,7 @@ public class IHMLecture implements Observer {
     
   
 
-    protected JComponent setMainPanel() {
+    private JComponent setMainPanel() {
         JPanel main_panel = new JPanel();
         BoxLayout b = new BoxLayout(main_panel, BoxLayout.Y_AXIS);
         main_panel.setLayout(b); 
@@ -119,29 +119,16 @@ public class IHMLecture implements Observer {
         // 3 sous-panel 
         JPanel panel_code = new JPanel();
         panel_code.setLayout(new GridLayout(1, 4));
-        
-        //Dimension d = new Dimension(100, 400);
-
         panel_code.add(new JLabel("Numéro Carte : "));
-        
-        //code.setSize(d);
         panel_code.add(this.getCode_carte());
-
         JPanel panel_num = new JPanel();
         panel_num.setLayout(new GridLayout(1, 2));
-     
-        
         panel_num.add(new JLabel("Numéro Employé : "));
-        
-        //numero.setPreferredSize(new Dimension(200, 24));
         panel_num.add(this.getNum_carte());
-
         JPanel panel_voyant = new JPanel();
         panel_voyant.setLayout(new GridLayout(1, 2));
-        
         panel_voyant.add(new JLabel("Voyant "));
         panel_voyant.add(_voyant);
-        //_voyant.setBackground(Color.red);
 
         main_panel.add(panel_code);
         main_panel.add(panel_num);

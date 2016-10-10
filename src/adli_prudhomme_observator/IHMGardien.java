@@ -2,6 +2,7 @@ package adli_prudhomme_observator;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
@@ -10,10 +11,12 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.Date;
 
 public class IHMGardien extends JFrame implements Observer {
 
 	private Controler _controler;
+        private JPanel _panel;
 
 	public IHMGardien(Controler c){
             this._controler = c;
@@ -21,42 +24,36 @@ public class IHMGardien extends JFrame implements Observer {
         }
         
         private void setWindows(){
+            //Création de la fenètre
             JFrame frame = new JFrame("Gardien - Rapport des intrusions");
-            frame.setSize(200, 300);
-                        //Création de la fenètre
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
+            frame.setSize(620, 800);
             
-            panel.add(setMainPanel("Texte"),BorderLayout.CENTER); 
+            //Création du panel 
+            _panel = new JPanel();
+            _panel.setLayout(new GridLayout(30,1));
+            _panel.add(new JLabel("Rapport des intrusions : "));
             
-            JButton b_OK = new JButton("ok"); 
-            panel.add(b_OK); 
-            
-            frame.add(panel); 
+            frame.add(_panel); 
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
-      
-         
         }
         
-        protected JComponent setMainPanel(String texte) {
-        JPanel main_panel = new JPanel();
+        protected void addLabel(String texte) {
+            JLabel nvLabel = new JLabel(texte);
+            _panel.add(nvLabel);
+            _panel.repaint();
+            _panel.revalidate();
+        }
         
-        BoxLayout b = new BoxLayout(main_panel, BoxLayout.Y_AXIS);
-        main_panel.setLayout(b); 
-        
-        JLabel lab = new JLabel(texte); 
-        main_panel.add(lab); 
-        
-        
-       
-        return main_panel;
-        
-    }
-        
-
-
         @Override
          public void update(Observable o, Object arg) {
+            HashMap<String, Object> map = (HashMap<String, Object>) arg;
+            if((boolean)map.get("Notification") == false){
+                JLabel rep = new JLabel();
+                String date = (String) map.get("Date");
+                String numPers = (String) map.get("NumPers");
+                String idPorte = map.get("idPorte").toString();
+                addLabel( date + " -|- Porte : " + idPorte + " -|- Numéro Personne : " + numPers + " -|- Batiment : A");
+            }
          }
-
-        }
+    }
