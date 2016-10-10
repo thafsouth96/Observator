@@ -84,7 +84,7 @@ public class IHMLecture implements Observer {
 
     private void setWindows() {
         //Création de la fenètre
-        frame = new JFrame("Porte 22 -Accès batiment A ");
+        frame = new JFrame("Porte 0 -Accès batiment A ");
         //Création du panel et de ses grid
         JPanel panel = new JPanel();
         //panel.setLayout(new BorderLayout());
