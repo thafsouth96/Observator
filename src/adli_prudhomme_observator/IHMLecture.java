@@ -87,22 +87,12 @@ public class IHMLecture implements Observer {
         frame = new JFrame("Porte 22 -Accès batiment A ");
         //Création du panel et de ses grid
         JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        //panel.setLayout(new BorderLayout());
         //Ajout des labels et champs 
-        panel.add(setMainPanel(), BorderLayout.CENTER);
-        //Bouton valider
-        JButton b_valider = new JButton("Valider"); 
-        b_valider.addActionListener(new ActionListener(
-        ) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sendData();
-            }
-        });
-        panel.add(b_valider, BorderLayout.SOUTH);
+        panel.add(setMainPanel()/*, BorderLayout.CENTER*/);
         //Ajout du panel
         frame.add(panel);
-        frame.setSize(750, 800);
+        frame.setSize(600, 250);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.validate();
@@ -128,11 +118,25 @@ public class IHMLecture implements Observer {
         JPanel panel_voyant = new JPanel();
         panel_voyant.setLayout(new GridLayout(1, 2));
         panel_voyant.add(new JLabel("Voyant "));
+        _voyant.setPreferredSize(new Dimension(100,100));
         panel_voyant.add(_voyant);
 
         main_panel.add(panel_code);
         main_panel.add(panel_num);
         main_panel.add(panel_voyant);
+        
+        //Bouton valider
+        JButton b_valider = new JButton("Valider"); 
+        b_valider.setPreferredSize(new Dimension(150,50));
+        b_valider.addActionListener(new ActionListener(
+        ) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendData();
+            }
+        });
+        main_panel.add(b_valider/*, BorderLayout.SOUTH*/);
+        
         return main_panel;
     }
 
