@@ -101,14 +101,18 @@ public class Controler extends Observable {
             Carte c1 = new Carte("R22");
             Carte c2 = new Carte("T11");
             Personne pers1 = new Personne("Gilmour","David",c1);
-            Personne pers0 = new Personne("","",c2);
+            Personne pers2 = new Personne("Ju","King",c2);
             
             //Inclusion dans les autres classes
             groupePortes.addPorte(porte1);
             portes.put(porte1.getIdPorte(), porte1);
             this.cartes.put(c1.getNumCarte(), c1);
+            this.cartes.put(c2.getNumCarte(),c2);
             c1.setPersonne(pers1);
+            c2.setPersonne(pers2);
             groupePers.addPersonne(pers1);
+            groupePersBis.addPersonne(pers2);
             pers1.addGroupe(groupePers);
+            pers2.addGroupe(groupePersBis);
         }
 }

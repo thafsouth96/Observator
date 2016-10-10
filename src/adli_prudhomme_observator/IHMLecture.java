@@ -22,12 +22,11 @@ public class IHMLecture implements Observer {
         this._controler = c;
         _voyantVert = false;
         _voyant = new JPanel();
-        _voyant.setPreferredSize( new Dimension( 90, 90 ) );
         code_carte = new JTextField(); 
         num_carte = new JTextField(); 
 
         setWindows();
-        setCouleurVoyant();
+        _voyant.setBackground(Color.white);
     }
     
     public String getCodeVAl(){
@@ -166,11 +165,11 @@ public class IHMLecture implements Observer {
        if((boolean) map.get("Notification")){
            _voyantVert = true;
            setCouleurVoyant();
-           _voyant.repaint();
-           this._voyant.revalidate();
+       }else{
+          _voyantVert = false;
+          setCouleurVoyant(); 
        }
-       _voyantVert = false;
-       
+       _voyantVert = false;    
         Thread thread = new Thread(){
             @Override
             public void run(){
@@ -179,7 +178,7 @@ public class IHMLecture implements Observer {
                 }catch(Exception e){
                     System.out.println("Gotcha");
                 }
-                _voyant.setBackground(Color.red);
+                _voyant.setBackground(Color.white);
             }
         };
         thread.start();
